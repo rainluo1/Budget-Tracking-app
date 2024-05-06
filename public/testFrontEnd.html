@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Tracker</title>
+</head>
+<body>
+    <h2>Budget Form</h2>
+    <form action="http://localhost:3000/submit-budget" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" required><br>
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+        <select class="category-select" name="dropdown">Choose a value
+            <option value="Parking">Parking</option>
+            <option value="Food">Food</option>
+            <option value="Clothe">Clothe</option>
+        </select>
+        <input type="text" id="newOption" placeholder="Add new option">
+        <button type="button" onclick="addOption()">Add Option</button>
+        <input type="submit">
+    </form>
+    <br>
+    <a href ="view.html"><button> click here to see previous records</button></a>
+    <br>
+    <a href ="category.html"><button id="collectionBtn"> category</button></a>
+    <script>
+        function addOption(){
+            var dropdown = document.querySelector('.category-select');
+            var newOptionText = document.getElementById('newOption').value.trim();
+            if (newOptionText) { // Check if the input is not empty
+                var newOption = new Option(newOptionText, newOptionText);
+                dropdown.add(newOption); // Correct method to add the option
+                document.getElementById("newOption").value = ''; // Clear the input field
+        }
+    }
+    </script>
+</body>
+</html>

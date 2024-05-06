@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Collection Names</title>
+</head>
+<body>
+    <h1>Collection Names</h1>
+    <ul id="collectionsList"></ul>
+
+    <script>
+        async function loadCollections() {
+            const response = await fetch('http://localhost:3000/collections');
+            const collections = await response.json();
+            const list = document.getElementById('collectionsList');
+            collections.forEach(collection => {
+                const item = document.createElement('li');
+                item.textContent = collection;
+                list.appendChild(item);
+            });
+        }
+
+        loadCollections();
+    </script>
+    <a href="/testFrontEnd.html"><button> Back to home</button></a>
+</body>
+</html>

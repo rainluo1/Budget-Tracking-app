@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view budget</title>
+    <style>
+        table, th, td {
+            border:1px solid black;
+            padding: 5px;
+            margin-bottom: 1px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spendings</h1>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Category</th>
+        </tr>
+        <tbody id="spendingList"></tbody>
+    </table>
+    <script>
+        async function loadCollections() {
+            try {
+                const response = await fetch('http://localhost:3000/api/spendings');
+                const spendings = await response.json();
+
+                const list = document.getElementById('spendingList');
+                spendings.forEach(spend => {
+                    const tr = document.createElement('tr');
+
+                    const tdName = document.createElement('td');
+                    tdName.innerHTML = spend.name;
+                    tr.appendChild(tdName);
+
+                    const tdDate = document.createElement('td');
+                    tdDate.innerHTML = spend.date;
+                    tr.appendChild(tdDate);
+
+                    const tdPrice = document.createElement('td');
+                    tdPrice.innerHTML = spend.price;
+                    tr.appendChild(tdPrice);
+
+                    const tdCatName = document.createElement('td');
+                    tdCatName.innerHTML = spend.collectionName;
+                    tr.appendChild(tdCatName)
+
+                    list.appendChild(tr);
+                });
+            } catch (error) {
+                console.error('Failed to load spendings:', error);
+            }
+        }
+        loadCollections();
+    </script>
+    <a href="/testFrontEnd.html"><button> Back to home</button></a>
+</body>
+</html>
